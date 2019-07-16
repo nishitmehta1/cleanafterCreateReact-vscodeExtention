@@ -23,7 +23,8 @@ function activate(context) {
     'extension.createAppjs',
     function() {
       // The code you place here will be executed every time your command is executed
-      const app = `import React, { Component } from 'react';
+      const appJs = `import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 class App extends Component {
@@ -37,29 +38,44 @@ class App extends Component {
 }
 
 export default App;			
-			`;
+      `;
+      const appCss = "";
 
       const folderPath = vscode.workspace.rootPath;
 
       console.log(folderPath);
 
-      fs.writeFile(path.join(folderPath, '/src/App.js'), app, err => {
+      fs.writeFile(path.join(folderPath, '/src/App.js'), appJs, err => {
         if (err) {
           console.log(err);
           return vscode.window.showErrorMessage(
             'Failed to create cleaned App.js'
           );
         }
-        vscode.window.showInformationMessage('Created Cleaned App.js');
+        vscode.window.showInformationMessage('Cleaned App.js');
+      });
+
+      fs.writeFile(path.join(folderPath, '/src/App.css'), appCss, err => {
+        if (err) {
+          console.log(err);
+          return vscode.window.showErrorMessage(
+            'Failed to create cleaned App.js'
+          );
+        }
+        vscode.window.showInformationMessage('Cleaned App.css');
       });
 
       fs.unlink(path.join(folderPath, '/src/logo.svg'), err => {
         if (err) {
-          console.log(err, 'Could not delete logo.svg');
+          vscode.window.showErrorMessage('Could not delete logo.svg')
+        }
+        else{
+          vscode.window.showInformationMessage('Deleted logo.svg');
         }
       });
     }
   );
+
 
   let disposable2 = vscode.commands.registerCommand(
     'extension.createAppjsWithBootstrap',
