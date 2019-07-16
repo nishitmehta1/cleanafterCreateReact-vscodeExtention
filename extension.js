@@ -24,6 +24,47 @@ function activate(context) {
     function() {
       // The code you place here will be executed every time your command is executed
       const app = `import React, { Component } from 'react';
+import './App.css';
+
+class App extends Component {
+	render() {
+		return (
+			<div>
+				
+			</div>
+		);
+	}
+}
+
+export default App;			
+			`;
+
+      const folderPath = vscode.workspace.rootPath;
+
+      console.log(folderPath);
+
+      fs.writeFile(path.join(folderPath, '/src/App.js'), app, err => {
+        if (err) {
+          console.log(err);
+          return vscode.window.showErrorMessage(
+            'Failed to create cleaned App.js'
+          );
+        }
+        vscode.window.showInformationMessage('Created Cleaned App.js');
+      });
+
+      fs.unlink(path.join(folderPath, '/src/logo.svg'), err => {
+        if (err) {
+          console.log(err, 'Could not delete logo.svg');
+        }
+      });
+    }
+  );
+
+  let disposable2 = vscode.commands.registerCommand(
+    'extension.createAppjsWithBootstrap',
+    () => {
+      const app = `import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -63,6 +104,7 @@ export default App;
   );
 
   context.subscriptions.push(disposable);
+  context.subscriptions.push(disposable2);
 }
 exports.activate = activate;
 

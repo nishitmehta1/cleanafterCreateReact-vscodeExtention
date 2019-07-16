@@ -10,7 +10,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:extension.createAppjs"
+    "onCommand:extension.createAppjs",
+    "onCommand:extension.createAppjsWithBootstrap"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -18,6 +19,22 @@
       {
         "command": "extension.createAppjs",
         "title": "Clean App.js"
+      },
+      {
+        "command": "extension.createAppjsWithBootstrap",
+        "title": "Clean App.js and import bootstrap"
+      }
+    ],
+    "keybindings": [
+      {
+        "key": "ctrl+alt+a",
+        "command": "extension.createAppjs",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+b",
+        "command": "extension.createAppjsWithBootstrap",
+        "when": "editorTextFocus"
       }
     ]
   },
