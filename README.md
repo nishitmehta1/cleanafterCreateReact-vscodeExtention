@@ -1,3 +1,7 @@
+# Download Link
+
+https://marketplace.visualstudio.com/items?itemName=3248.cleanup-after-react
+
 # Clean: create-react-app
 
 Instantly delete unnecessary boiler plate contents.
